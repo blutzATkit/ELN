@@ -56,6 +56,9 @@ class MainFrame():
     def click_properties_tab(self):
         self.driver.find_element(By.ID, MFL.properties_tab_id).click()
 
+    def click_properties_molarity_tab(self):
+        self.driver.find_element(By.ID, MFL.properties_molarity_tab_id).click()    
+
     def click_spectra_editor_button(self):
         self.driver.find_element(By.CLASS_NAME, MFL.spectra_editor_button_classname).click()
 
@@ -97,7 +100,6 @@ class MainFrame():
 
     def get_melting_temperature(self):
         return self.driver.find_element(By.XPATH, MFL.sample_melting_temperature_textbox_xpath).get_attribute("value")
-
     
     def get_iupac(self):
         elem = self.driver.find_element(By.XPATH, MFL.sample_iupac_xpath)
@@ -115,5 +117,28 @@ class MainFrame():
     
     def get_iupac_span(self):
         return self.driver.find_element(By.XPATH, MFL.iupac_span).text
+
+    def change_sample_amount(self, sample_value):
+        elem = self.driver.find_element(By.XPATH, MFL.sample_amount_xpath)
+        elem.clear()
+        elem.send_keys(sample_value)
     
+    def get_sample_amount(self):
+        return self.driver.find_element(By.XPATH, MFL.sample_amount_xpath).get_attribute("value")
+    
+    def change_density(self, density_value):
+        elem = self.driver.find_element(By.XPATH, MFL.sample_density_xpath)
+        elem.clear()
+        elem.send_keys(density_value)
+    
+    def change_molarity(self, molarity_value):
+        elem = self.driver.find_element(By.XPATH, MFL.sample_molarity_xpath)
+        elem.clear()
+        elem.send_keys(molarity_value)
+    
+    def get_density(self):
+        return self.driver.find_element(By.XPATH, MFL.sample_density_xpath).get_attribute("value")
+
+    def get_molarity(self):
+        return self.driver.find_element(By.XPATH, MFL.sample_molarity_xpath).get_attribute("value")    
     

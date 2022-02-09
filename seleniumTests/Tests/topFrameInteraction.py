@@ -17,6 +17,8 @@ from seleniumTests.POM.topFrame import TopFrame
 
 class LoginTest(unittest.TestCase):
 
+    URL = "http://localhost:4000/home"
+
     email_address = "new.user@provider.edu"
     password = "asdasdasd"
     first_name = "new"
@@ -160,4 +162,5 @@ class LoginTest(unittest.TestCase):
         cls.driver.quit()
 
 if __name__ == '__main__':
+    LoginTest.URL = os.environ.get('URL', LoginTest.URL)
     unittest.main()

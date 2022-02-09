@@ -13,6 +13,8 @@ from seleniumTests.POM.topFrame import TopFrame
 from seleniumTests.POM.userType import UserType
 
 class LoginTest(unittest.TestCase):
+
+    URL = "http://localhost:4000/home"
     
     user = UserType(
         email = "chemotion_user_0001@chemotion.edu",
@@ -30,7 +32,7 @@ class LoginTest(unittest.TestCase):
 
     @classmethod
     def setUp(cls):
-        cls.driver.get("http://localhost:4000/home")
+        cls.driver.get(cls.URL)
         cls.driver.implicitly_wait(5)
     
     def enter_login_data(self):
@@ -72,7 +74,7 @@ class LoginTest(unittest.TestCase):
         self.enter_login_data()
         top_frame = TopFrame(self.driver)
         top_frame.click_login()
-        assert "Chemotion" in self.driver.title        
+        assert "Chemotion" in self.driver.title
 
     @classmethod
     def tearDown(cls):
@@ -86,4 +88,5 @@ class LoginTest(unittest.TestCase):
         cls.driver.quit()
 
 if __name__ == '__main__':
+    LoginTest.URL = os.environ.get('URL', LoginTest.URL)
     unittest.main()

@@ -12,13 +12,15 @@ from seleniumTests.POM.mainFrame import MainFrame
 from seleniumTests.POM.topFrame import TopFrame
 
 class LoginTest(unittest.TestCase):
+    
+    URL = "http://localhost:4000/home"
 
     @classmethod
     def setUpClass(cls):
         cls.driver = webdriver.Firefox()
         cls.driver.implicitly_wait(10)
         cls.driver.maximize_window()
-        cls.driver.get("http://localhost:4000/home")
+        cls.driver.get(cls.URL)
         cls.driver.implicitly_wait(10)
         top_frame = TopFrame(cls.driver)
         top_frame.enter_username("test.user@provider.edu")
@@ -30,7 +32,7 @@ class LoginTest(unittest.TestCase):
         home_page = MainFrame(cls.driver)
         home_page.click_my_data_button()
         home_page.click_sample_link()
-
+    
     def test_0001_Stereo_Abs_values_reflection(self):
         home_page = MainFrame(self.driver)
         home_page.click_properties_tab()
@@ -83,6 +85,21 @@ class LoginTest(unittest.TestCase):
             except NoSuchElementException:
                 continue
         assert "p-geminal" in home_page.get_iupac_span()
+        
+    def test_003_Change_Density(self):
+        home_page = MainFrame(self.driver)
+        home_page.click_properties_tab()
+
+        try:
+            home_page.change_density(4)
+            time.sleep(1)
+            home_page.save_sample_btn()
+            assert '4.0000' == home_page.get_density()
+        except:
+            home_page.change_density(2)
+            time.sleep(1)
+            home_page.save_sample_btn()
+            assert '2.0000' == home_page.get_density()
 
     @classmethod
     def tearDown(cls):
@@ -98,4 +115,5 @@ class LoginTest(unittest.TestCase):
         cls.driver.quit()
 
 if __name__ == '__main__':
+    LoginTest.URL = os.environ.get('URL', LoginTest.URL)
     unittest.main()
