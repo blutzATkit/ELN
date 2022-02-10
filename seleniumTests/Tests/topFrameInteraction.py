@@ -36,7 +36,7 @@ class LoginTest(unittest.TestCase):
 
     @classmethod
     def setUp(cls):
-        cls.driver.get("http://localhost:4000/home")
+        cls.driver.get(cls.URL)
         cls.driver.implicitly_wait(10)
 
     def login_invalid_user(self):
