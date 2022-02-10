@@ -58,6 +58,10 @@ class MainFrameLocators(object):
     stereo_abs_xpath = '//*[@id="react-select-3--option-'
     stereo_rel_xpath = '//*[@id="react-select-4--option-'
     iupac_span = '//*[@id="elements-tabs-pane-0"]/div/div[2]/div[1]/div[1]/h4/div/p[1]/span/span'
+    sample_amount_xpath = '//*[@id="SampleDetailsXTab-pane-properties"]/span[1]/div/table/tbody/tr[3]/td/table/tbody/tr/td[2]/div/span/input'
+    sample_density_xpath = '//*[@id="tab-density-molarity-pane-density"]/div/span/input'
+    sample_molarity_xpath = '//*[@id="tab-density-molarity-pane-molarity"]/div/span/input'
+    properties_molarity_tab_id = '//*[@id="tab-density-molarity-tab-molarity"]'                                  
     
 class PasswordNewPageLocators(object):
     log_in_link_text = "Log in"

@@ -13,12 +13,14 @@ from seleniumTests.POM.topFrame import TopFrame
 
 class LoginTest(unittest.TestCase):
 
+    URL = "http://localhost:4000/home"
+
     @classmethod
     def setUpClass(cls):
         cls.driver = webdriver.Firefox()
         cls.driver.implicitly_wait(10)
         cls.driver.maximize_window()
-        cls.driver.get("http://localhost:4000/home")
+        cls.driver.get(cls.URL)
         cls.driver.implicitly_wait(10)
         top_frame = TopFrame(cls.driver)
         top_frame.enter_username("test.user@provider.edu")
@@ -73,4 +75,5 @@ class LoginTest(unittest.TestCase):
         cls.driver.quit()
 
 if __name__ == '__main__':
+    LoginTest.URL = os.environ.get('URL', LoginTest.URL)
     unittest.main()
